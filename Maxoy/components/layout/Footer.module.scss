@@ -1,0 +1,118 @@
+@use "../../styles/mixin" as mixin;
+
+.footer {
+  background: #fff;
+  border-top: 1px solid var(--gray-2);
+  padding: 5.6rem 0 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+  gap: 4rem;
+  align-items: start;
+  padding-bottom: 4.8rem;
+
+  @include mixin.respond(tab-port) {
+    grid-template-columns: 1fr;
+    gap: 2.8rem;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 2.6rem;
+  font-family: var(--font-brand);
+
+  img {
+    height: 46px;
+    width: auto;
+  }
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.desc {
+  max-width: 44rem;
+  font-size: 1.4rem;
+  line-height: 1.65;
+  color: rgba(17, 24, 39, 0.7);
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4rem;
+
+  @include mixin.respond(phone-big) {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: rgba(17, 24, 39, 0.68);
+  }
+
+  a:hover {
+    color: var(--secondary-color);
+  }
+}
+
+.heading {
+  font-size: 1.3rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(17, 24, 39, 0.9);
+  font-weight: 700;
+}
+
+.bottom {
+  border-top: 1px solid var(--gray-2);
+  padding: 1.8rem 0;
+}
+
+.bottomInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  font-size: 1.2rem;
+  color: rgba(17, 24, 39, 0.62);
+
+  @include mixin.respond(tab-port) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.muted {
+  color: rgba(17, 24, 39, 0.55);
+}

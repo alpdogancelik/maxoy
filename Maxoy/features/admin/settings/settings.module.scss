@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.card {
+  background: #fff;
+  padding: 1.6rem;
+  border-radius: 1.4rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.card label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 1.3rem;
+}
+
+.card input {
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid #dcdcdc;
+}
+
+.save {
+  align-self: flex-start;
+  padding: 0.8rem 1.4rem;
+  border-radius: 1rem;
+  border: none;
+  background: #1b1c1f;
+  color: #fff;
+}

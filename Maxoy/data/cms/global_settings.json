@@ -1,0 +1,22 @@
+{
+  "updatedAt": "2026-01-28T10:34:00.276Z",
+  "data": {
+    "currency": "TRY",
+    "whatsapp": "",
+    "returnPolicy": "",
+    "shippingNote": "",
+    "footerText": "",
+    "logoUrl": "",
+    "address": "",
+    "social": {
+      "instagram": "",
+      "twitter": "",
+      "facebook": ""
+    },
+    "siteName": "Maxoy",
+    "siteUrl": "",
+    "phone": "",
+    "email": ""
+  },
+  "id": "global"
+}

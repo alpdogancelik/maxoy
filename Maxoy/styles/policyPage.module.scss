@@ -1,0 +1,28 @@
+@use "./mixin" as mixin;
+
+.page {
+  padding: 8rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: min(860px, 100%);
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: var(--shadow-soft);
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1.6rem;
+    color: var(--primary-color);
+  }
+
+  p {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: var(--gray-1);
+    margin-bottom: 1.2rem;
+  }
+}

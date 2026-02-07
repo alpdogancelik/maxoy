@@ -1,0 +1,36 @@
+.layout {
+  padding: 0;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: calc(var(--announcement-height) + var(--header-height) + env(safe-area-inset-top));
+  padding-bottom: calc(var(--sticky-bar-height, 0px) + env(safe-area-inset-bottom));
+}
+
+.footer {
+  margin-top: 0;
+  padding: 0;
+  padding-bottom: calc(var(--sticky-bar-height, 0px) + env(safe-area-inset-bottom));
+  border-top: none;
+}
+
+.dev {
+  font-size: 1.3rem;
+  margin: 2.4rem 0 2rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.wrapper {
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}

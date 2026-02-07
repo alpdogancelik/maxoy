@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filters input,
+.filters button {
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid #dcdcdc;
+}
+
+.list {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: #fff;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+}

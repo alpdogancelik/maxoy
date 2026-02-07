@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: maxoy_db
+    environment:
+      POSTGRES_USER: maxoy
+      POSTGRES_PASSWORD: maxoy
+      POSTGRES_DB: maxoy
+    ports:
+      - "5432:5432"
+    volumes:
+      - maxoy_db:/var/lib/postgresql/data
+
+volumes:
+  maxoy_db:
+

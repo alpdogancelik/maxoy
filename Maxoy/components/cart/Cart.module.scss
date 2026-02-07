@@ -1,0 +1,377 @@
+@use "../../styles/mixin" as mixin;
+.cart-wrapper {
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  /* will-change: transform; */
+  transition: all 0.5s ease;
+  overflow-y: hidden;
+}
+.cart-container {
+  height: 100vh;
+  width: 60rem;
+  background-color: var(--surface-color);
+  float: right;
+  padding: 1.8rem 1.6rem calc(1.8rem + env(safe-area-inset-bottom));
+  position: relative;
+  z-index: 100000;
+
+  @include mixin.respond(phone) {
+    width: 85%;
+  }
+  @media screen and (max-width: 455px) {
+    width: 100%;
+  }
+
+  // @include mixin.respond(phone-xsm) {
+  //   width: 100%;
+  // }
+}
+
+.drawerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.4rem 1.4rem;
+  border-bottom: 1px solid var(--gray-2);
+}
+
+.drawerTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.drawerCount {
+  font-weight: 700;
+  color: var(--gray-1);
+}
+
+.closeBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--gray-2);
+  background: #fff;
+  cursor: pointer;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--primary-color);
+}
+
+.closeBtn:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+.cart-bottom {
+  width: 100%;
+  padding: 3rem 6.5rem;
+  padding-bottom: 10rem;
+  z-index: 1000;
+  overflow: hidden;
+}
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem auto 0;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cart-heading {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  gap: 2px;
+  margin-left: 1rem;
+  border: none;
+  background-color: transparent;
+}
+
+.cart-heading .heading {
+  margin-left: 1rem;
+}
+.cart-num-items {
+  margin-left: 1rem;
+  color: var(--secondary-color);
+}
+.empty-cart {
+  margin: 4rem 2rem;
+  text-align: center;
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+.emptyIcon {
+  width: 140px;
+  height: 140px;
+  margin: 1.2rem auto 1.6rem;
+  color: rgba(188, 63, 89, 0.35);
+}
+
+.emptyIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.empty-cart h3 {
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: var(--primary-color);
+}
+
+.emptyCta {
+  width: 100%;
+  margin-top: 1.6rem;
+  border: none;
+  background: var(--secondary-color);
+  color: #fff;
+  padding: 1.2rem 1.6rem;
+  border-radius: var(--radius-md, 12px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.emptyCta:hover {
+  filter: brightness(0.95);
+}
+.cancel {
+  cursor: pointer;
+}
+.product-container {
+  margin-top: 15px;
+  overflow: auto;
+  max-height: 70vh;
+  padding: 2rem 1rem;
+}
+.product {
+  display: flex;
+  gap: 3rem;
+  padding: 2rem;
+  justify-content: space-between;
+}
+
+.product .cart-product-image {
+  width: 10rem;
+  height: 15rem;
+  border-radius: 5px;
+}
+.item-desc .flex {
+  display: flex;
+  justify-content: space-between;
+  width: 35rem;
+  color: var(--primary-color);
+}
+.item-desc p {
+  font-size: 1.5rem;
+}
+.item-desc .bottom {
+  margin-top: 60px;
+}
+.flex h5 {
+  font-size: 2.4rem;
+}
+.flex h4 {
+  font-size: 2rem;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+.total h3 {
+  font-size: 2.2rem;
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+}
+
+.couponBox {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.couponField {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.couponField input {
+  flex: 1;
+  border: 1px solid var(--gray-2);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-size: 1.3rem;
+}
+
+.couponField button {
+  border: none;
+  background: var(--secondary-color);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
+
+.couponChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+}
+
+.couponChip button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.error {
+  color: #b00020;
+  font-size: 1.2rem;
+}
+.shippingInfo {
+  margin-top: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid #e6e6e6;
+  background: #f9faf7;
+}
+
+.shippingTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.shippingInfo p {
+  margin-top: 0.4rem;
+  font-size: 1.3rem;
+  color: #5b5b5b;
+}
+
+.shippingInfo small {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+.remove-item {
+  font-size: 2.4rem;
+  color: #f02d34;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.quantity-desc {
+  border: 1px solid gray;
+  padding: 6px;
+}
+.quantity p {
+  color: rgb(116, 116, 116);
+}
+.quantity-desc span {
+  font-size: 1.6rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.quantity-desc .minus {
+  border-right: 1px solid gray;
+  color: #f02d34;
+}
+.quantity-desc .num {
+  border-right: 1px solid gray;
+  font-size: 2rem;
+}
+.quantity-desc .plus {
+  color: rgb(49, 168, 49);
+}
+
+.whatsappOrder {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  border: none;
+  border-radius: var(--radius-md, 12px);
+  background: #25d366;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quoteButton {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid var(--secondary-color);
+  background: transparent;
+  color: var(--secondary-color);
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quoteButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.minOrderNote {
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  color: #d35400;
+}
+
+.trustLine {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #5b5b5b;
+  text-align: center;
+}
+
+.invoiceSection {
+  margin-top: 2rem;
+}
+
+.invoiceToggle {
+  border: none;
+  background: var(--gray-2);
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.invoiceForm {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.invoiceForm input,
+.invoiceForm textarea {
+  border: 1px solid var(--gray-2);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 1.4rem;
+}

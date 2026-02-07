@@ -1,0 +1,188 @@
+@use "../../styles/mixin" as mixin;
+.hero-section {
+  max-width: 140rem;
+  align-items: center;
+  padding: 11rem 3.2rem 6rem;
+  margin: 0 auto;
+  @include mixin.respond(tab-land) {
+    max-width: 130rem;
+  }
+
+  grid-template-columns: 60% 40%;
+  span {
+    color: var(--secondary-color);
+  }
+  @include mixin.respond(phone-big) {
+    grid-template-columns: 1fr;
+    padding: 9rem 3.2rem 4rem 3.2rem;
+  }
+  @include mixin.respond(phone) {
+    grid-template-columns: 1fr;
+    padding: 10rem 2.4rem 4rem 2.4rem;
+  }
+  @include mixin.respond(phone-sm) {
+    padding-top: 10rem;
+  }
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  @include mixin.respond(phone-big) {
+    text-align: center;
+  }
+  p {
+    font-size: 2.6rem;
+    margin-top: 0.4rem;
+    @include mixin.respond(tab-port) {
+      font-size: 2rem;
+    }
+    @include mixin.respond(phone) {
+      font-size: 1.5rem;
+    }
+  }
+  button a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(55, 124, 87, 0.12);
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  @include mixin.respond(phone-big) {
+    align-self: center;
+  }
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  @include mixin.respond(phone-big) {
+    justify-content: center;
+  }
+}
+
+.secondaryCta {
+  padding: 1.2rem 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--secondary-color);
+  background: transparent;
+  color: var(--secondary-color);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.secondaryCta a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.categoryCards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.6rem;
+  @include mixin.respond(tab-port) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.categoryCard {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.categoryCard:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+// .hero-image {
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+// }
+.hero-image-container {
+  @include mixin.respond(phone-big) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.hero-images {
+  width: 100%;
+  @include mixin.respond(phone-big) {
+    width: 40%;
+  }
+  position: relative;
+}
+.leaf1 {
+  width: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: rotate(180deg);
+  @include mixin.respond(phone) {
+    width: 8rem;
+  }
+}
+.leaf2 {
+  width: 8rem;
+  position: absolute;
+  top: 5%;
+  left: 60%;
+  @include mixin.respond(phone) {
+    width: 5rem;
+  }
+}
+.leaf3 {
+  width: 10rem;
+  position: absolute;
+  top: 60%;
+  left: 70%;
+  @include mixin.respond(phone) {
+    width: 8rem;
+  }
+}
+.hero-num {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: flex-start;
+  @include mixin.respond(phone-big) {
+    justify-content: center;
+  }
+}
+.hero-num-content {
+  p {
+    color: var(--secondary-color);
+    font-size: 3rem;
+  }
+  span {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+  }
+}

@@ -1,0 +1,97 @@
+@use "./mixin" as mixin;
+
+.page {
+  padding: 8rem 0;
+}
+
+.header {
+  margin-bottom: 3rem;
+
+  h1 {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: var(--gray-1);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+
+  @include mixin.respond(tab-port) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+  }
+}
+
+.profileList {
+  display: grid;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  color: var(--gray-1);
+
+  span {
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+}
+
+.empty {
+  font-size: 1.4rem;
+  color: var(--gray-1);
+}
+
+.linkButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray-2);
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.linkButton:hover {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.logoutRow {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logoutButton {
+  border: none;
+  background: var(--secondary-color);
+  color: #fff;
+  padding: 1rem 1.6rem;
+  border-radius: 999px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}

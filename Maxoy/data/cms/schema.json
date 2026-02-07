@@ -1,0 +1,48 @@
+{
+    "pages":  {
+                  "slug":  "string",
+                  "id":  "string",
+                  "createdAt":  "ISO8601",
+                  "version":  "number",
+                  "revisions":  "array",
+                  "locale":  "string",
+                  "sections":  "array",
+                  "publishedAt":  "ISO8601|null",
+                  "updatedAt":  "ISO8601",
+                  "seo":  {
+                              "ogImage":  "string",
+                              "title":  "string",
+                              "description":  "string",
+                              "canonical":  "string",
+                              "noindex":  "boolean"
+                          },
+                  "status":  "draft|published"
+              },
+    "navigation":  {
+                       "updatedAt":  "ISO8601",
+                       "items":  "array",
+                       "id":  "string",
+                       "locale":  "string"
+                   },
+    "global_settings":  {
+                            "updatedAt":  "ISO8601",
+                            "data":  {
+                                         "currency":  "string",
+                                         "whatsapp":  "string",
+                                         "returnPolicy":  "string",
+                                         "shippingNote":  "string",
+                                         "footerText":  "string",
+                                         "logoUrl":  "string",
+                                         "address":  "string",
+                                         "social":  {
+                                                        "instagram":  "string",
+                                                        "twitter":  "string",
+                                                        "facebook":  "string"
+                                                    },
+                                         "siteName":  "string",
+                                         "phone":  "string",
+                                         "email":  "string"
+                                     },
+                            "id":  "string"
+                        }
+}

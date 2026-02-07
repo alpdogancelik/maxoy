@@ -1,0 +1,99 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 10, 12, 0.45);
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.panel {
+  width: min(64rem, 100%);
+  background: var(--surface-color);
+  border-radius: var(--radius-lg, 20px);
+  padding: 2.4rem;
+  box-shadow: var(--shadow-card);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+.close {
+  border: none;
+  background: transparent;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+
+.inputRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  border: 1px solid var(--gray-2);
+  border-radius: var(--radius-pill, 999px);
+  padding: 0.8rem 1.2rem;
+  min-height: 4.6rem;
+}
+
+.inputRow input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.4rem;
+  font-family: var(--font-base);
+  min-height: 3.6rem;
+}
+
+.inputRow button {
+  border: none;
+  background: var(--secondary-color);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-pill, 999px);
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 3.6rem;
+}
+
+.hint {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.suggestions {
+  margin-top: 1.6rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.suggestion {
+  border: 1px solid var(--gray-2);
+  background: var(--surface-color);
+  border-radius: var(--radius-md, 12px);
+  padding: 0.8rem 1.2rem;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.suggestion span {
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.loading,
+.empty {
+  font-size: 1.2rem;
+  color: var(--muted);
+}

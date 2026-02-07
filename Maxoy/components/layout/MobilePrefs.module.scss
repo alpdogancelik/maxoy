@@ -1,0 +1,55 @@
+@use "../../styles/mixin" as mixin;
+
+.mobilePrefs {
+  display: none;
+  width: min(92%, 520px);
+  margin: 0 auto 2rem;
+  padding: 1.4rem 1.6rem;
+  background: #fff;
+  border: 1px solid #eef2ee;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  gap: 1.2rem;
+
+  @include mixin.respond(phone-big) {
+    display: flex;
+    flex-direction: column;
+    margin-top: 7.2rem;
+  }
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.controlLabel {
+  font-size: 1.1rem;
+  color: var(--gray-1);
+  font-weight: 600;
+}
+
+.pillGroup {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pill,
+.pillActive {
+  border: 1px solid var(--gray-2);
+  background: var(--bg-color);
+  color: var(--primary-color);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pillActive {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: #fff;
+}

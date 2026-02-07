@@ -1,0 +1,64 @@
+[
+    {
+        "updatedAt":  "2026-01-28T04:28:58.4632673+03:00",
+        "items":  [
+                      {
+                          "label":  "Anasayfa",
+                          "href":  "/",
+                          "id":  "nav-tr-home",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "Hakkimizda",
+                          "href":  "/about",
+                          "id":  "nav-tr-about",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "Iletisim",
+                          "href":  "/contact",
+                          "id":  "nav-tr-contact",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "Teklif Al",
+                          "href":  "/wholesale",
+                          "id":  "nav-tr-quote",
+                          "type":  "link"
+                      }
+                  ],
+        "id":  "nav-tr",
+        "locale":  "tr"
+    },
+    {
+        "updatedAt":  "2026-01-28T04:28:58.4632673+03:00",
+        "items":  [
+                      {
+                          "label":  "Home",
+                          "href":  "/",
+                          "id":  "nav-en-home",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "About",
+                          "href":  "/about",
+                          "id":  "nav-en-about",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "Contact",
+                          "href":  "/contact",
+                          "id":  "nav-en-contact",
+                          "type":  "link"
+                      },
+                      {
+                          "label":  "Get Quote",
+                          "href":  "/wholesale",
+                          "id":  "nav-en-quote",
+                          "type":  "link"
+                      }
+                  ],
+        "id":  "nav-en",
+        "locale":  "en"
+    }
+]

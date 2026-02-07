@@ -1,0 +1,217 @@
+@use "../../styles/mixin" as mixin;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 10, 12, 0.45);
+  z-index: 350;
+  display: flex;
+  justify-content: flex-start;
+  backdrop-filter: blur(6px);
+}
+
+.drawer {
+  width: min(88vw, 360px);
+  height: 100%;
+  background: #fff;
+  padding: calc(2.4rem + env(safe-area-inset-top)) 2rem calc(2rem + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  box-shadow: 24px 0 40px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.6rem;
+
+  button {
+    border: none;
+    background: transparent;
+    font-size: 2.4rem;
+    cursor: pointer;
+    color: var(--primary-color);
+  }
+}
+
+.searchForm {
+  display: flex;
+  gap: 0.8rem;
+
+  input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-2);
+    font-size: 1.4rem;
+    min-height: 4.2rem;
+  }
+
+  button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--secondary-color);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.3rem;
+    min-height: 4.2rem;
+    cursor: pointer;
+  }
+}
+
+.actionRow {
+  display: flex;
+  gap: 0.8rem;
+
+  button,
+  a {
+    flex: 1;
+    text-align: center;
+    padding: 0.9rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--gray-2);
+    background: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+
+  h4 {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gray-1);
+  }
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.accordionItem {
+  border: 1px solid var(--gray-2);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.accordionTrigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--primary-color);
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+}
+
+.accordionTrigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.accordionPanel,
+.accordionPanelOpen {
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+
+.accordionPanel {
+  max-height: 0;
+}
+
+.accordionPanelOpen {
+  max-height: 420px;
+  padding: 0 1.4rem 1.2rem;
+}
+
+.mainLink {
+  display: inline-flex;
+  margin: 0.6rem 0 1rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.accordionPanelOpen ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0;
+  margin: 0;
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.3rem;
+  }
+}
+
+.quickLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 0;
+  margin: 0;
+
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+  }
+}
+
+.langSwitch {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.langButton {
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--gray-2);
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.langButtonActive {
+  background: var(--secondary-color);
+  color: #fff;
+  border-color: var(--secondary-color);
+}
+
+.whatsappCta {
+  margin-top: auto;
+  text-align: center;
+  padding: 1.1rem 1.4rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}

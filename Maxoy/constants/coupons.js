@@ -1,0 +1,35 @@
+export const COUPON_DEFINITIONS = [
+  {
+    code: "MAXOY10",
+    type: "percentage",
+    value: 10,
+    minTotal: 500,
+    expiresAt: "2026-12-31T23:59:59+03:00",
+    label: { tr: "%10 indirim", en: "10% off" },
+  },
+  {
+    code: "MAXOY200",
+    type: "fixed",
+    value: 200,
+    minTotal: 2000,
+    expiresAt: "2026-12-31T23:59:59+03:00",
+    label: { tr: "200? indirim", en: "200? off" },
+  },
+  {
+    code: "KARGOBEDAVA",
+    type: "free_shipping",
+    value: 0,
+    minTotal: 1500,
+    expiresAt: "2026-12-31T23:59:59+03:00",
+    label: { tr: "Ücretsiz kargo", en: "Free shipping" },
+  },
+  {
+    code: "OASIS15",
+    type: "percentage",
+    value: 15,
+    minTotal: 1000,
+    expiresAt: "2026-12-31T23:59:59+03:00",
+    categories: ["E1"],
+    label: { tr: "Oasis ürünlerinde %15", en: "15% off Oasis" },
+  },
+];

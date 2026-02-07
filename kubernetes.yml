@@ -1,0 +1,242 @@
+# Kubernetes Deployment (Optional)
+# For production Kubernetes deployment
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: maxoy
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: maxoy-secrets
+  namespace: maxoy
+type: Opaque
+stringData:
+  database-url: "postgresql://maxoy:CHANGE_ME@postgres:5432/maxoy"
+  admin-email: "admin@yourdomain.com"
+  admin-password: "CHANGE_ME"
+  postgres-password: "CHANGE_ME"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maxoy-config
+  namespace: maxoy
+data:
+  NODE_ENV: "production"
+  NEXT_TELEMETRY_DISABLED: "1"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: maxoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:16-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: maxoy
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: maxoy-secrets
+              key: postgres-password
+        - name: POSTGRES_DB
+          value: maxoy
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: maxoy
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: maxoy
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maxoy-app
+  namespace: maxoy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: maxoy-app
+  template:
+    metadata:
+      labels:
+        app: maxoy-app
+    spec:
+      containers:
+      - name: app
+        image: ghcr.io/yourorg/maxoy:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: maxoy-secrets
+              key: database-url
+        - name: ADMIN_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: maxoy-secrets
+              key: admin-email
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: maxoy-secrets
+              key: admin-password
+        envFrom:
+        - configMapRef:
+            name: maxoy-config
+        livenessProbe:
+          httpGet:
+            path: /admin/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /admin/health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maxoy-app
+  namespace: maxoy
+spec:
+  selector:
+    app: maxoy-app
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: maxoy-ingress
+  namespace: maxoy
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - yourdomain.com
+    - www.yourdomain.com
+    secretName: maxoy-tls
+  rules:
+  - host: yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: maxoy-app
+            port:
+              number: 80
+  - host: www.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: maxoy-app
+            port:
+              number: 80
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: maxoy-app-hpa
+  namespace: maxoy
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: maxoy-app
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80

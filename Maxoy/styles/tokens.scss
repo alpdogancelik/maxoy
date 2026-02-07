@@ -1,0 +1,48 @@
+:root {
+  --color-primary: #2b1a23;
+  --color-secondary: #a22b4f;
+  --color-surface: #ffffff;
+  --color-background: #fbf6f5;
+  --color-text: #2b1a23;
+  --color-muted: #7b6a72;
+  --color-accent-soft: #f3e6ea;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 8px 18px rgba(42, 12, 25, 0.08);
+  --shadow-md: 0 12px 24px rgba(49, 19, 32, 0.12);
+  --shadow-lg: 0 18px 45px rgba(42, 12, 25, 0.12);
+
+  --space-1: 0.4rem;
+  --space-2: 0.8rem;
+  --space-3: 1.2rem;
+  --space-4: 1.6rem;
+  --space-5: 2rem;
+  --space-6: 2.4rem;
+  --space-7: 3.2rem;
+  --space-8: 4rem;
+
+  --font-size-xs: 1.1rem;
+  --font-size-sm: 1.3rem;
+  --font-size-md: 1.5rem;
+  --font-size-lg: 1.8rem;
+  --font-size-xl: 2.2rem;
+  --font-size-xxl: 3rem;
+
+  --btn-height: 4.2rem;
+}
+
+:root.dark-mode {
+  --color-primary: #f2e8ec;
+  --color-secondary: #e26b8c;
+  --color-surface: #23181f;
+  --color-background: #1d1419;
+  --color-text: #f2e8ec;
+  --color-muted: #a19097;
+  --color-accent-soft: #2f2029;
+}

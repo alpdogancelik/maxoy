@@ -1,0 +1,56 @@
+@use "../../styles/mixin" as mixin;
+
+.strip {
+  border-top: 1px solid var(--gray-2);
+  border-bottom: 1px solid var(--gray-2);
+  background: #fff;
+  padding: 3.2rem 0;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  color: rgba(17, 24, 39, 0.9);
+}
+
+.text {
+  font-size: 1.4rem;
+  color: rgba(17, 24, 39, 0.75);
+}
+
+@include mixin.respond(tab-port) {
+  .strip {
+    padding: 2.4rem 0;
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .item {
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
+}

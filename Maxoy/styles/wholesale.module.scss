@@ -1,0 +1,199 @@
+@use "./mixin" as mixin;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 0 auto;
+  max-width: 100rem;
+}
+
+.header h1 {
+  font-size: 3.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.header p {
+  font-size: 1.6rem;
+  color: var(--gray-1);
+  max-width: 60rem;
+  line-height: 1.6;
+}
+
+.steps {
+  background: #f6f7f4;
+  border-radius: 16px;
+  padding: 2rem 2.4rem;
+  border: 1px solid #e5e7e0;
+}
+
+.steps h2 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.steps ol {
+  display: grid;
+  gap: 0.8rem;
+  padding-left: 1.8rem;
+  font-size: 1.4rem;
+  color: #3b3b3b;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.flowHeader h2 {
+  font-size: 2rem;
+}
+
+.flowHeader p {
+  font-size: 1.4rem;
+  color: var(--gray-1);
+}
+
+.flowGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+  @include mixin.respond(tab-port) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @include mixin.respond(phone) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.flowCard {
+  padding: 1.6rem 1.8rem;
+  border-radius: 14px;
+  border: 1px solid #e3e3de;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.flowStep {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(55, 124, 87, 0.12);
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.statusCard {
+  padding: 1.6rem 2rem;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.statusSuccess {
+  background: #e6f7ee;
+  border: 1px solid #8fd3ad;
+}
+
+.statusError {
+  background: #fff1f1;
+  border: 1px solid #f2a3a3;
+}
+
+.statusCard h3 {
+  font-size: 1.8rem;
+}
+
+.statusCard p {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.statusAction {
+  align-self: flex-start;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--secondary-color);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form {
+  display: grid;
+  gap: 1.6rem 2rem;
+  padding: 2.4rem;
+  border-radius: 18px;
+  border: 1px solid var(--gray-2);
+  background: #fff;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  @include mixin.respond(tab-port) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form h2 {
+  grid-column: 1 / -1;
+  font-size: 2.2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.field input,
+.field textarea {
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid var(--gray-2);
+  font-size: 1.4rem;
+}
+
+.helper {
+  font-size: 1.2rem;
+  color: var(--gray-1);
+}
+
+.error {
+  font-size: 1.2rem;
+  color: #c83434;
+}
+
+.fileName {
+  font-size: 1.3rem;
+  color: #2f5f44;
+  font-weight: 600;
+}
+
+.submit {
+  grid-column: 1 / -1;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: none;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "path": "Maxoy"
+    }
+  ],
+  "settings": {
+    "explorer.excludeGitIgnore": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.next-dev": true,
+      "**/.next-build": true,
+      "**/test-results": true,
+      "**/playwright-report": true,
+      "**/coverage": true,
+      "**/.turbo": true,
+      "**/.vercel": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.next-dev": true,
+      "**/.next-build": true,
+      "**/test-results": true,
+      "**/playwright-report": true,
+      "**/coverage": true,
+      "**/.turbo": true,
+      "**/.vercel": true
+    }
+  }
+}
+

@@ -1,0 +1,144 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.section {
+  padding: 24px 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  align-items: center;
+}
+
+.heroContent h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.heroContent p {
+  font-size: 1.5rem;
+  color: rgba(17, 24, 39, 0.7);
+  line-height: 1.65;
+}
+
+.eyebrow {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: #5cb85c;
+  margin-bottom: 8px;
+}
+
+.heroCta {
+  margin-top: 16px;
+  display: inline-flex;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #2d5016;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.heroImage img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.promoBanner {
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-weight: 600;
+  background: #eef6ff;
+  color: #2d4b73;
+}
+
+.promo_success {
+  background: #ecf8f0;
+  color: #2d6a3a;
+}
+
+.promo_warning {
+  background: #fff3e6;
+  color: #8a4b00;
+}
+
+.categorySection .sectionHeader {
+  margin-bottom: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.categoryCard {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  color: #2d5016;
+  font-weight: 600;
+}
+
+.categoryCard img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.richText {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.richText p {
+  margin-bottom: 12px;
+  color: rgba(17, 24, 39, 0.74);
+  line-height: 1.75;
+  font-size: 1.5rem;
+}
+
+.contactBlock {
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.contactBlock ul {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #333;
+}
+
+.previewBanner {
+  background: #fff3cd;
+  color: #8a6d3b;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,93 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding-bottom: 6rem;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+
+.header h1 {
+  font-size: 3.2rem;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 1.4rem;
+  margin-top: 0.6rem;
+}
+
+.updated {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--gray-1);
+}
+
+.langToggle {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.langToggle button {
+  border: 1px solid var(--gray-2);
+  background: transparent;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.active {
+  border-color: var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.sections {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.section {
+  padding: 1.6rem;
+  border: 1px solid var(--gray-2);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--surface-color);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+}
+
+.section p {
+  font-size: 1.4rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.contact {
+  padding: 1.6rem;
+  border: 1px solid var(--gray-2);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--accent-soft);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.contact h3 {
+  font-size: 1.6rem;
+}
+
+.contact p {
+  font-size: 1.3rem;
+  color: var(--muted);
+}

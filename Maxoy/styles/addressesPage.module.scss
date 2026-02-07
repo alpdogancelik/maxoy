@@ -1,0 +1,43 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding-bottom: 6rem;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 1.4rem;
+}
+
+.addButton {
+  border: none;
+  border-radius: var(--radius-pill, 999px);
+  background: var(--secondary-color);
+  color: #fff;
+  padding: 0.8rem 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.formWrapper {
+  max-width: 72rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: 1.6rem;
+}

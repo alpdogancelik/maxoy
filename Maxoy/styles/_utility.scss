@@ -1,0 +1,77 @@
+@use "../styles/mixin" as mixin;
+.btn {
+  background-color: var(--secondary-color);
+  padding: 1.1rem 3.2rem;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.8rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.3s;
+  @include mixin.respond(tab-port) {
+    font-size: 2rem;
+  }
+  @include mixin.respond(phone) {
+    font-size: 1.5rem;
+  }
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #7c213d;
+}
+.btn-small {
+  background-color: var(--secondary-color);
+  padding: 1rem 2.4rem;
+  margin-top: 2rem;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-small:hover,
+.btn-small:active {
+  background-color: #7c213d;
+}
+
+//reusable grids
+.grid {
+  display: grid;
+}
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--5-cols {
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+  @include mixin.respond(phone-big) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+// center container
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 2rem 2.4rem;
+}
+
+.section {
+  padding: 7rem;
+}
+.padding-top {
+  padding-top: 5rem;
+}
+.margin-top {
+  margin-top: 3rem;
+}
+.margin-bottom {
+  margin-bottom: 5rem;
+}

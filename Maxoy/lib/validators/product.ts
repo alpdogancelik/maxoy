@@ -1,0 +1,26 @@
+import { z } from "zod";
+
+export const ProductSchema = z.object({
+  nameTR: z.string().min(1),
+  nameEN: z.string().min(1),
+  slug: z.string().optional(),
+  sku: z.string().min(1),
+  barcode: z.string().optional().nullable(),
+  categoryId: z.string().min(1),
+  priceRetail: z.number().min(0),
+  priceWholesale: z.number().min(0).optional().nullable(),
+  priceVip: z.number().min(0).optional().nullable(),
+  discount: z.number().min(0).optional().nullable(),
+  stockQty: z.number().int().min(0),
+  isActive: z.boolean().optional(),
+  isFeatured: z.boolean().optional(),
+  tags: z.array(z.string()).optional(),
+  shortDescTR: z.string().optional().nullable(),
+  shortDescEN: z.string().optional().nullable(),
+  longDescTR: z.string().optional().nullable(),
+  longDescEN: z.string().optional().nullable(),
+  seoTitle: z.string().optional().nullable(),
+  seoDesc: z.string().optional().nullable(),
+  status: z.enum(["DRAFT", "PUBLISHED"]).optional(),
+  mediaIds: z.array(z.string()).optional(),
+});
