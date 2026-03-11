@@ -1,2 +1,3 @@
-export { GET, POST } from "@/server/admin/catalog-pages.handlers";
+export const dynamic = "force-dynamic";
 
+export { GET, POST } from "@/server/admin/catalog-pages.handlers";

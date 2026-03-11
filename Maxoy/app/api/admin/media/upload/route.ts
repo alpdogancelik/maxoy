@@ -4,6 +4,7 @@ import path from "node:path";
 import { requirePermissionFromRequest } from "@/lib/admin-permissions-server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 function assertSafeKey(key: string) {
   const normalized = key.replace(/\\/g, "/");
@@ -41,4 +42,3 @@ export async function PUT(request: NextRequest) {
 
   return NextResponse.json({ ok: true });
 }
-

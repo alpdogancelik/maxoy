@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 import { requirePermissionFromRequest } from "@/lib/admin-permissions-server";
 import { getObjectStream } from "@/lib/storage";
 
+export const dynamic = "force-dynamic";
+
 function redactEnvValue(key: string, value: string | undefined) {
   if (!value) return null;
   const isSecret =
