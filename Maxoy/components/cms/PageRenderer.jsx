@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Image from "next/image";
 import styles from "../../styles/cmsPage.module.scss";
 
 const HeroSection = ({ eyebrow, title, subtitle, ctaLabel, ctaHref, imageUrl }) => (
@@ -16,7 +17,13 @@ const HeroSection = ({ eyebrow, title, subtitle, ctaLabel, ctaHref, imageUrl }) 
     </div>
     {imageUrl && (
       <div className={styles.heroImage}>
-        <img src={imageUrl} alt={title || "Hero image"} />
+        <Image
+          src={imageUrl}
+          alt={title || "Hero image"}
+          width={1200}
+          height={900}
+          className={styles.mediaImage}
+        />
       </div>
     )}
   </section>
@@ -42,7 +49,15 @@ const CategoryGridSection = ({ title, subtitle, items = [] }) => (
       {items.map((item) => (
         <a key={item.id || item.href || item.label} href={item.href || "#"}>
           <div className={styles.categoryCard}>
-            {item.image && <img src={item.image} alt={item.label || "Category"} />}
+            {item.image && (
+              <Image
+                src={item.image}
+                alt={item.label || "Category"}
+                width={320}
+                height={240}
+                className={styles.mediaImage}
+              />
+            )}
             <span>{item.label}</span>
           </div>
         </a>

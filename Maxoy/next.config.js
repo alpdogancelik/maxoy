@@ -5,6 +5,9 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   output: "standalone",
   reactStrictMode: true,
+  experimental: {
+    largePageDataBytes: 256 * 1000,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

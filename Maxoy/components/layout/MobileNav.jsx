@@ -27,9 +27,13 @@ const MobileNav = ({ isOpen, onClose }) => {
 
   useBodyScrollLock(isOpen);
 
-  const accountLink = isAuthenticated
-    ? "/account"
-    : { pathname: "/login", query: { next: router.asPath } };
+  const accountLink = useMemo(
+    () =>
+      isAuthenticated
+        ? "/account"
+        : { pathname: "/login", query: { next: router.asPath } },
+    [isAuthenticated, router.asPath]
+  );
 
   const quickLinks = useMemo(
     () => [

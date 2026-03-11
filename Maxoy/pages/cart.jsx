@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "../styles/cartPage.module.scss";
 import { useStateContext } from "../context/StateContext";
 import { t } from "../constants/i18n";
@@ -76,7 +77,13 @@ const CartPage = () => {
         <div className={styles.items}>
           {cartItems.map((item) => (
             <div className={styles.item} key={item.id || item.code}>
-              <img src={getProductMainImage(item)} alt={item.name} />
+              <Image
+                src={getProductMainImage(item)}
+                alt={item.name || ""}
+                width={100}
+                height={100}
+                className={styles.itemImage}
+              />
               <div className={styles.itemInfo}>
                 <div className={styles.itemHeader}>
                   <h4>{item.name}</h4>

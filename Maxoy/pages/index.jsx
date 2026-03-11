@@ -6,7 +6,7 @@ import HomeMaxoy from "../components/home/HomeMaxoy";
 import PageRenderer from "../components/cms/PageRenderer";
 import cmsStyles from "../styles/cmsPage.module.scss";
 import { getGlobalSettings, getPageBySlug, getPages } from "../lib/cms/store";
-import { getStorefrontProducts } from "../lib/storefront/products";
+import { getStorefrontProducts, toListingProduct } from "../lib/storefront/products";
 import { getStoreHome } from "../lib/storefront/home";
 
 const HomePage = ({ cmsPage, preview, globalSettings, products, stats, home, featuredProducts }) => {
@@ -82,6 +82,7 @@ export const getStaticProps = async ({ query }) => {
 
     const featuredProducts = (home?.featuredProducts || [])
         .map((ref) => byKey.get(String(ref.productId)))
+        .map((product) => toListingProduct(product))
         .filter(Boolean);
 
     return {
@@ -89,7 +90,7 @@ export const getStaticProps = async ({ query }) => {
             cmsPage: cmsPage || null,
             preview,
             globalSettings,
-            products: products.slice(0, 48),
+            products: products.slice(0, 48).map((product) => toListingProduct(product)),
             stats,
             home: home || null,
             featuredProducts,

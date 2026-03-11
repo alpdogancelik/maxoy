@@ -36,7 +36,6 @@ const SmartImage: React.FC<SmartImageProps> = ({
 
   const commonStyle = fill ? { width: "100%", height: "100%", ...style } : style;
   const commonProps = {
-    alt,
     className,
     style: commonStyle,
     ...rest,
@@ -44,12 +43,17 @@ const SmartImage: React.FC<SmartImageProps> = ({
 
   if (isDataUrl(imageSrc) || isSvg(imageSrc)) {
     return (
+      // Data URLs and SVGs can bypass Next image optimization safely here.
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={imageSrc}
+        alt={alt}
         loading={priority ? "eager" : "lazy"}
         width={width}
         height={height}
-        {...commonProps}
+        className={className}
+        style={commonStyle}
+        {...rest}
       />
     );
   }
@@ -58,6 +62,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
     return (
       <Image
         src={imageSrc}
+        alt={alt}
         fill
         sizes={sizes || "100vw"}
         priority={priority}
@@ -69,6 +74,7 @@ const SmartImage: React.FC<SmartImageProps> = ({
   return (
     <Image
       src={imageSrc}
+      alt={alt}
       width={width || 400}
       height={height || 400}
       sizes={sizes}

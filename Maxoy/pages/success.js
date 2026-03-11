@@ -31,7 +31,7 @@ const Success = () => {
     setTotalPrice(0);
     setTotalQuantities(0);
     runFireWorks();
-  }, []);
+  }, [setCartItems, setTotalPrice, setTotalQuantities]);
   return (
     <div className="success-container">
       <div className="text-box">

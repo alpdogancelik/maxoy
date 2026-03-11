@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AiOutlineSearch, AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
 import { FiChevronDown } from "react-icons/fi";
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
@@ -141,7 +142,7 @@ const Navbar = () => {
         </button>
 
         <Link href="/" className={styles.logo}>
-            <img src={logoUrl} alt={brandName} />
+            <Image src={logoUrl} alt={brandName} width={120} height={36} />
             <span>{brandName}</span>
           </Link>
 

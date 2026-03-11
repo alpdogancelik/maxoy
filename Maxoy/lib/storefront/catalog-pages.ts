@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/db";
-import { getStorefrontProducts } from "@/lib/storefront/products";
+import { getStorefrontProducts, toListingProduct } from "@/lib/storefront/products";
 import { getStorefrontCategories } from "@/lib/storefront/categories";
 import { getStorefrontSettings } from "@/lib/storefront/settings";
 import { CATALOG_PAGE_LIST } from "@/constants/catalogPages";
@@ -209,7 +209,7 @@ export async function getCatalogPageStaticProps(path: string, locale?: string) {
 
   return {
     props: {
-      products: filtered,
+      products: filtered.map((product) => toListingProduct(product)),
       categories,
       catalogPage: catalogPage || null,
       globalSettings,

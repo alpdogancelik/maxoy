@@ -509,7 +509,7 @@ const Plants = ({
       list_id: activeSub || activeMain || "all",
       list_name: activeSub || activeMain || "all",
     });
-  }, [listAnalyticsKey]);
+  }, [activeMain, activeSub, listAnalyticsKey, sortedProducts]);
 
   const suggestionSource = useMemo(() => {
     if (!allowedMainSet && !allowedSubSet) return products;

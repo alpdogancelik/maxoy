@@ -43,6 +43,7 @@ const CardPlantList = ({ product, highlightQuery = "" }) => {
         : t(language, "product.priceModeRetail");
   const stockValue = Number(stock || 0);
   const minStockValue = Number(minStock || 0);
+  const variantCount = Number(product.variantCount || product.variants?.length || 0);
   const stockStatus =
     stockValue <= 0
       ? "out"
@@ -116,9 +117,9 @@ const CardPlantList = ({ product, highlightQuery = "" }) => {
                     : t(language, "product.inStock")}
               </span>
             </div>
-            {product.variants?.length > 1 && (
+            {variantCount > 1 && (
               <div className={styles.variantNote}>
-                {t(language, "product.variants")}: {product.variants.length}
+                {t(language, "product.variants")}: {variantCount}
               </div>
             )}
             <div className={styles.shippingHint}>{t(language, "product.shippingHint")}</div>

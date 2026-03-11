@@ -109,3 +109,13 @@ export async function getStorefrontProductBySlug(slug: string) {
     null
   );
 }
+
+export function toListingProduct(product: StorefrontProduct | null | undefined): StorefrontProduct | null {
+  if (!product) return null;
+  const variantCount = Array.isArray(product.variants) ? product.variants.length : 0;
+  const { variants, ...rest } = product;
+  return {
+    ...rest,
+    variantCount,
+  };
+}
