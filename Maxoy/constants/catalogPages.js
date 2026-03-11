@@ -2,6 +2,8 @@ export const CATALOG_PAGES = {
   allProducts: {
     slug: "/tum-urunler",
     titleKey: "catalog.allProducts",
+    titleTR: "Tüm Ürünler",
+    titleEN: "All Products",
     initialMainCategory: "All",
     initialSubcategory: "",
     allowedMainCategories: null,
@@ -10,6 +12,8 @@ export const CATALOG_PAGES = {
   readyProducts: {
     slug: "/hazir-urunler",
     titleKey: "catalog.readyProducts",
+    titleTR: "Hazır Ürünler",
+    titleEN: "Ready Products",
     initialMainCategory: "C",
     initialSubcategory: "",
     allowedMainCategories: ["C"],
@@ -18,6 +22,8 @@ export const CATALOG_PAGES = {
   artificialDry: {
     slug: "/cicek-cesitleri",
     titleKey: "catalog.artificialDry",
+    titleTR: "Yapay ve Kuru Çiçekler",
+    titleEN: "Artificial and Dried Flowers",
     initialMainCategory: "All",
     initialSubcategory: "",
     allowedMainCategories: ["A", "B"],
@@ -26,6 +32,8 @@ export const CATALOG_PAGES = {
   packaging: {
     slug: "/toptan-cicek-malzemesi-ambalaj-cesitleri",
     titleKey: "catalog.packaging",
+    titleTR: "Ambalaj Çeşitleri",
+    titleEN: "Packaging Types",
     initialMainCategory: "F",
     initialSubcategory: "",
     allowedMainCategories: ["F"],
@@ -34,6 +42,8 @@ export const CATALOG_PAGES = {
   oasis: {
     slug: "/toptan-cicek-malzemesi-oasis-cesitleri",
     titleKey: "catalog.oasis",
+    titleTR: "Oasis Çeşitleri",
+    titleEN: "Oasis Types",
     initialMainCategory: "E",
     initialSubcategory: "E1",
     allowedMainCategories: ["E"],

@@ -32,8 +32,8 @@ function fallbackByPath(path: string): Partial<StoreCatalogPage> | null {
   return {
     key: match.slug,
     path: match.slug,
-    titleTR: match.titleKey,
-    titleEN: match.titleKey,
+    titleTR: match.titleTR || match.titleKey,
+    titleEN: match.titleEN || match.titleKey,
     initialMainCategory: match.initialMainCategory || null,
     initialSubcategory: match.initialSubcategory || null,
     allowedMainCategories: match.allowedMainCategories || [],
