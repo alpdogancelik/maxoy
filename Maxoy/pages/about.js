@@ -9,6 +9,16 @@ import { getGlobalSettings, getPageBySlug, getPages } from "../lib/cms/store";
 
 const About = ({ cmsPage, preview, globalSettings }) => {
   const { language } = useStateContext();
+  const aboutIntro =
+    language === "tr"
+      ? "Maxoy, bitki ve çiçek ürünleri için hazırlanmış bir e-ticaret demo projesidir. Bu proje, modern arayüz ve kullanıcı deneyimi yeteneklerini sergilemek amacıyla oluşturulmuştur. Geliştirici portföyü:"
+      : t(language, "about.intro");
+  const aboutOutro =
+    language === "tr"
+      ? "Altyapıda Next.js, Sanity, SCSS ve Stripe kullanılmıştır."
+      : t(language, "about.introAfter");
+  const creditsLabel = language === "tr" ? "Görsel kaynak:" : t(language, "about.creditsLabel");
+
   if (cmsPage) {
     return (
       <motion.div
@@ -34,7 +44,7 @@ const About = ({ cmsPage, preview, globalSettings }) => {
     >
       <h3>{t(language, "about.title")}</h3>
       <p>
-        {t(language, "about.intro")}{" "}
+        {aboutIntro}{" "}
         <a
           href="https://www.kennethvega.com/"
           target="_blank"
@@ -42,8 +52,8 @@ const About = ({ cmsPage, preview, globalSettings }) => {
         >
           {t(language, "about.portfolio")}
         </a>{" "}
-        {t(language, "about.introAfter")}{" "}
-        {t(language, "about.creditsLabel")}{" "}
+        {aboutOutro}{" "}
+        {creditsLabel}{" "}
         <a
           href="https://www.leonandgeorge.com/"
           target="_blank"
