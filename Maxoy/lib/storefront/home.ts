@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { withStorefrontDbTimeout } from "./db-utils";
 
 export type StoreHomeAnnouncement = {
   id: string;
@@ -62,15 +63,16 @@ export type StoreHome = {
 };
 
 async function resolveAssetUrl(assetId: string): Promise<string | null> {
-  const asset = await prisma.mediaAsset.findUnique({ where: { id: assetId } });
-  return asset?.url || null;
+  return withStorefrontDbTimeout(
+    prisma.mediaAsset.findUnique({ where: { id: assetId } }).then((asset) => asset?.url || null),
+    () => null
+  );
 }
 
 export async function getStoreHome(options?: { preview?: boolean }): Promise<StoreHome | null> {
   const preview = Boolean(options?.preview);
-  let home: any = null;
-  try {
-    home = await prisma.homePage.findFirst({
+  const home = await withStorefrontDbTimeout(
+    prisma.homePage.findFirst({
       include: {
         announcements: true,
         heroSlides: true,
@@ -78,10 +80,9 @@ export async function getStoreHome(options?: { preview?: boolean }): Promise<Sto
         featured: true,
         trustBadges: true,
       },
-    });
-  } catch {
-    return null;
-  }
+    }),
+    () => null
+  );
 
   if (!home) return null;
   if (!preview && home.status !== "PUBLISHED") return null;

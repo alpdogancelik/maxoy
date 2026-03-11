@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { prisma } from "@/lib/db";
 import { enrichProducts, groupVariants } from "@/lib/productTransforms";
+import { withStorefrontDbTimeout } from "./db-utils";
 
 export type StorefrontProduct = Record<string, any>;
 
@@ -68,8 +69,8 @@ export async function getStorefrontProducts({
 }: {
   includeUnpublished?: boolean;
 } = {}) {
-  try {
-    const items = await prisma.product.findMany({
+  return withStorefrontDbTimeout(
+    prisma.product.findMany({
       where: {
         deletedAt: null,
         ...(includeUnpublished ? {} : { status: "PUBLISHED", isActive: true }),
@@ -79,13 +80,12 @@ export async function getStorefrontProducts({
         media: { include: { media: true }, orderBy: { sortOrder: "asc" } },
       },
       orderBy: { createdAt: "desc" },
-    });
-
-    const mapped = items.map(mapProduct);
-    return groupVariants(mapped);
-  } catch {
-    return loadProductsFromJson();
-  }
+    }).then((items) => {
+      const mapped = items.map(mapProduct);
+      return groupVariants(mapped);
+    }),
+    () => loadProductsFromJson()
+  );
 }
 
 export async function getStorefrontProductBySlug(slug: string) {

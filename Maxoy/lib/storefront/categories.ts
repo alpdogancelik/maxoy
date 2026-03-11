@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { withStorefrontDbTimeout } from "./db-utils";
 
 export type StoreCategory = {
   id: string;
@@ -10,21 +11,20 @@ export type StoreCategory = {
 };
 
 export async function getStorefrontCategories(): Promise<StoreCategory[]> {
-  try {
-    const items = await prisma.category.findMany({
+  return withStorefrontDbTimeout(
+    prisma.category.findMany({
       where: { deletedAt: null, isActive: true },
       orderBy: [{ sortOrder: "asc" }, { nameTR: "asc" }],
-    });
-
-    return items.map((c) => ({
-      id: c.id,
-      slug: c.slug,
-      nameTR: c.nameTR,
-      nameEN: c.nameEN,
-      parentId: c.parentId ?? null,
-      sortOrder: c.sortOrder ?? 0,
-    }));
-  } catch {
-    return [];
-  }
+    }).then((items) =>
+      items.map((c) => ({
+        id: c.id,
+        slug: c.slug,
+        nameTR: c.nameTR,
+        nameEN: c.nameEN,
+        parentId: c.parentId ?? null,
+        sortOrder: c.sortOrder ?? 0,
+      }))
+    ),
+    () => []
+  );
 }

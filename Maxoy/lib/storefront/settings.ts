@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { withStorefrontDbTimeout } from "./db-utils";
 
 export type StorefrontSettings = {
   brand: { siteName: string; logoUrl: string | null; faviconUrl: string | null };
@@ -10,17 +11,14 @@ export type StorefrontSettings = {
 
 async function resolveAssetUrl(assetId: string | null | undefined): Promise<string | null> {
   if (!assetId) return null;
-  const asset = await prisma.mediaAsset.findUnique({ where: { id: assetId } });
-  return asset?.url || null;
+  return withStorefrontDbTimeout(
+    prisma.mediaAsset.findUnique({ where: { id: assetId } }).then((asset) => asset?.url || null),
+    () => null
+  );
 }
 
 export async function getStorefrontSettings(): Promise<StorefrontSettings> {
-  let settings: any = null;
-  try {
-    settings = await prisma.settings.findFirst();
-  } catch {
-    settings = null;
-  }
+  const settings = await withStorefrontDbTimeout(prisma.settings.findFirst(), () => null);
   const data = (settings?.data || {}) as any;
 
   const logoUrl = await resolveAssetUrl(data?.brand?.logoAssetId).catch(() => null);
