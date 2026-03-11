@@ -655,14 +655,80 @@ export const TRANSLATIONS = {
       },
     },
   },
+  en: {
+    nav: {
+      categories: "Categories",
+      home: "Home",
+      products: "All Products",
+      readyProducts: "Ready Products",
+      artificialDry: "Artificial & Dried Flowers",
+      oasisTypes: "Oasis Types",
+      account: "My Account",
+      search: "Search",
+      menu: "Menu",
+      close: "Close",
+      quickLinks: "Quick Links",
+      announcement: "Secure Shopping",
+      searchTitle: "What are you looking for?",
+      searchPlaceholder: "Search product, category or code...",
+      searchSubmit: "Search",
+      searchHint: "For example: oasis, ribbon, bouquet tulle",
+      whatsappCta: "Quick contact via WhatsApp",
+    },
+    home: {
+      brand: "Maxoy",
+    },
+    footer: {
+      about: "About",
+    },
+    form: {
+      required: "This field is required.",
+      invalidEmail: "Enter a valid email address.",
+      minPassword: "Password must be at least {count} characters.",
+      passwordMismatch: "Passwords do not match.",
+    },
+    account: {
+      registerSuccess: "Registration details saved.",
+      loginSuccess: "Login details saved.",
+      placeholders: {
+        fullName: "Jane Doe",
+        email: "mail@maxoy.com",
+        password: "********",
+      },
+    },
+    auth: {
+      loginTitle: "Sign In",
+      loginSubtitle: "Sign in to your account.",
+      registerTitle: "Create Account",
+      registerSubtitle: "Create a new account.",
+      fullNameLabel: "Full Name",
+      emailLabel: "Email",
+      passwordLabel: "Password",
+      confirmPasswordLabel: "Confirm Password",
+      submitLogin: "Sign In",
+      submitRegister: "Create Account",
+      forgotPassword: "Forgot Password",
+      noAccount: "Don't have an account?",
+      haveAccount: "Already have an account?",
+      switchToRegister: "Register",
+      switchToLogin: "Sign In",
+    },
+  },
 };
 
 export function t(lang, key, vars = {}) {
   const target = TRANSLATIONS[lang] || TRANSLATIONS.tr;
+  const fallback = TRANSLATIONS.tr;
   const parts = key.split(".");
   let value = target;
   for (const part of parts) {
     value = value?.[part];
+  }
+  if (typeof value !== "string") {
+    value = fallback;
+    for (const part of parts) {
+      value = value?.[part];
+    }
   }
   if (typeof value !== "string") return key;
   return value.replace(/\{(\w+)\}/g, (_, v) => vars[v] ?? "");
