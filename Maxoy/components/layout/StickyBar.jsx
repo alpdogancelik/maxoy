@@ -30,7 +30,7 @@ const StickyBar = () => {
     if (typeof document === "undefined") return;
     const root = document.documentElement;
     if (visible) {
-      root.style.setProperty("--sticky-bar-height", "7.6rem");
+      root.style.setProperty("--sticky-bar-height", "9.4rem");
     } else {
       root.style.removeProperty("--sticky-bar-height");
     }

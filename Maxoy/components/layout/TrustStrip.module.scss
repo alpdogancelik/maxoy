@@ -3,7 +3,7 @@
 .strip {
   border-top: 1px solid var(--gray-2);
   border-bottom: 1px solid var(--gray-2);
-  background: #fff;
+  background: color-mix(in srgb, var(--surface-color) 96%, transparent);
   padding: 3.2rem 0;
 }
 
@@ -29,8 +29,9 @@
 }
 
 .text {
-  font-size: 1.4rem;
-  color: rgba(17, 24, 39, 0.75);
+  font-size: 1.45rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--primary-color) 72%, var(--surface-color));
 }
 
 @include mixin.respond(tab-port) {
@@ -45,12 +46,18 @@
 
   .item {
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     text-align: left;
+    padding-inline: 0.8rem;
   }
 
   .icon {
     width: 36px;
     height: 36px;
+  }
+
+  .text {
+    font-size: 1.4rem;
   }
 }

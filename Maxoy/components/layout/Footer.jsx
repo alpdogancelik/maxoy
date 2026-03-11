@@ -16,7 +16,7 @@ const Footer = () => {
         const settingsRes = await fetch("/api/store/settings");
         const data = await settingsRes.json().catch(() => null);
         if (isMounted) setStoreSettings(data?.settings || null);
-      } catch (e) {
+      } catch {
         if (isMounted) setStoreSettings(null);
       }
     };
@@ -70,8 +70,8 @@ const Footer = () => {
           </Link>
           <p className={styles.desc}>
             {isEn
-              ? "Wholesale & retail flower supplies — fast delivery, secure shopping."
-              : "Toptan + perakende çiçek malzemeleri — hızlı teslimat, güvenli alışveriş."}
+              ? "Wholesale and retail flower supplies, fast delivery, secure shopping."
+              : "Toptan ve perakende çiçek malzemeleri, hızlı teslimat ve güvenli alışveriş."}
           </p>
         </div>
 
@@ -79,9 +79,9 @@ const Footer = () => {
           <div className={styles.col}>
             <div className={styles.heading}>{isEn ? "Categories" : "Kategoriler"}</div>
             <ul>
-              {categories.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href}>{l.name}</Link>
+              {categories.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -90,9 +90,9 @@ const Footer = () => {
           <div className={styles.col}>
             <div className={styles.heading}>{isEn ? "My account" : "Hesabım"}</div>
             <ul>
-              {accountLinks.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href}>{l.name}</Link>
+              {accountLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -101,9 +101,9 @@ const Footer = () => {
           <div className={styles.col}>
             <div className={styles.heading}>{isEn ? "About" : "Hakkımızda"}</div>
             <ul>
-              {aboutLinks.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href}>{l.name}</Link>
+              {aboutLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href}>{link.name}</Link>
                 </li>
               ))}
             </ul>
@@ -115,7 +115,9 @@ const Footer = () => {
         <div className="container">
           <div className={styles.bottomInner}>
             <span>© {year} {brandName}</span>
-            <span className={styles.muted}>{isEn ? "All rights reserved." : "Tüm hakları saklıdır."}</span>
+            <span className={styles.muted}>
+              {isEn ? "All rights reserved." : "Tüm hakları saklıdır."}
+            </span>
           </div>
         </div>
       </div>

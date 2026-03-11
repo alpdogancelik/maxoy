@@ -76,7 +76,7 @@ const TrustStrip = () => {
     },
     {
       icon: TruckIcon,
-      text: isEn ? "Free shipping over 3000₺" : "3000₺ Üzeri Ücretsiz Kargo",
+      text: isEn ? "Free shipping over 3000 TRY" : "3000₺ üzeri ücretsiz kargo",
     },
     {
       icon: PriceIcon,
@@ -87,12 +87,12 @@ const TrustStrip = () => {
   return (
     <section className={styles.strip} aria-label={isEn ? "Trust badges" : "Güven bilgileri"}>
       <div className={`container ${styles.inner}`}>
-        {items.map((it) => {
-          const Icon = it.icon;
+        {items.map((item) => {
+          const Icon = item.icon;
           return (
-            <div key={it.text} className={styles.item}>
+            <div key={item.text} className={styles.item}>
               <Icon className={styles.icon} />
-              <div className={styles.text}>{it.text}</div>
+              <div className={styles.text}>{item.text}</div>
             </div>
           );
         })}

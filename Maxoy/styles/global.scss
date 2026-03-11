@@ -102,15 +102,15 @@ html {
   }
 
   @include mixin.respond(phone-big) {
-    font-size: 45%;
+    font-size: 50%;
   }
 
   @include mixin.respond(phone-sm) {
-    font-size: 38%;
+    font-size: 47%;
   }
 
   @include mixin.respond(phone-esm) {
-    font-size: 35%;
+    font-size: 44%;
   }
 }
 

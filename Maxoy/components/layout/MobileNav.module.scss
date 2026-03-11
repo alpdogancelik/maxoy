@@ -4,35 +4,44 @@
   position: fixed;
   inset: 0;
   background: rgba(12, 10, 12, 0.45);
-  z-index: 350;
+  z-index: 500;
   display: flex;
   justify-content: flex-start;
   backdrop-filter: blur(6px);
 }
 
 .drawer {
-  width: min(88vw, 360px);
+  width: min(92vw, 380px);
   height: 100%;
-  background: #fff;
-  padding: calc(2.4rem + env(safe-area-inset-top)) 2rem calc(2rem + env(safe-area-inset-bottom));
+  background: var(--surface-color);
+  color: var(--primary-color);
+  padding: calc(1.8rem + env(safe-area-inset-top)) 1.6rem calc(2.4rem + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 2.4rem;
+  gap: 1.8rem;
   box-shadow: 24px 0 40px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
 }
 
 .header {
+  position: sticky;
+  top: calc(-1.8rem - env(safe-area-inset-top));
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: calc(1.6rem + env(safe-area-inset-top)) 0 1.2rem;
+  margin-bottom: 0.4rem;
+  background: var(--surface-color);
   font-weight: 600;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 
   button {
     border: none;
     background: transparent;
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     cursor: pointer;
     color: var(--primary-color);
   }
@@ -44,22 +53,23 @@
 
   input {
     flex: 1;
-    padding: 0.8rem 1rem;
-    border-radius: 10px;
+    padding: 1.1rem 1.2rem;
+    border-radius: 14px;
     border: 1px solid var(--gray-2);
-    font-size: 1.4rem;
-    min-height: 4.2rem;
+    background: color-mix(in srgb, var(--surface-color) 86%, transparent);
+    font-size: 1.35rem;
+    min-height: 4.6rem;
   }
 
   button {
-    padding: 0.8rem 1.2rem;
-    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    border-radius: 14px;
     border: none;
     background: var(--secondary-color);
     color: #fff;
     font-weight: 600;
     font-size: 1.3rem;
-    min-height: 4.2rem;
+    min-height: 4.6rem;
     cursor: pointer;
   }
 }
@@ -72,11 +82,11 @@
   a {
     flex: 1;
     text-align: center;
-    padding: 0.9rem 1.2rem;
+    padding: 1rem 1.2rem;
     border-radius: 999px;
     border: 1px solid var(--gray-2);
-    background: #fff;
-    font-size: 1.2rem;
+    background: color-mix(in srgb, var(--surface-color) 92%, transparent);
+    font-size: 1.3rem;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -90,10 +100,10 @@
   gap: 1.2rem;
 
   h4 {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--gray-1);
+    letter-spacing: 0.16em;
+    color: color-mix(in srgb, var(--primary-color) 72%, var(--surface-color));
   }
 }
 
@@ -105,9 +115,9 @@
 
 .accordionItem {
   border: 1px solid var(--gray-2);
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #fff;
+  background: color-mix(in srgb, var(--surface-color) 94%, transparent);
 }
 
 .accordionTrigger {
@@ -118,7 +128,7 @@
   padding: 1.2rem 1.4rem;
   border: none;
   background: transparent;
-  font-size: 1.4rem;
+  font-size: 1.32rem;
   font-weight: 600;
   cursor: pointer;
   color: var(--primary-color);
@@ -150,7 +160,8 @@
 .mainLink {
   display: inline-flex;
   margin: 0.6rem 0 1rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--secondary-color);
   text-decoration: none;
 }
@@ -166,7 +177,8 @@
   a {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1.28rem;
+    line-height: 1.45;
   }
 }
 
@@ -181,7 +193,9 @@
   a {
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1.34rem;
+    line-height: 1.45;
+    font-weight: 500;
   }
 }
 
@@ -191,11 +205,12 @@
 }
 
 .langButton {
-  padding: 0.4rem 1.2rem;
+  padding: 0.55rem 1.2rem;
   border-radius: 999px;
   border: 1px solid var(--gray-2);
   background: transparent;
   font-size: 1.2rem;
+  color: var(--primary-color);
   cursor: pointer;
 }
 
@@ -206,12 +221,29 @@
 }
 
 .whatsappCta {
-  margin-top: auto;
+  margin-top: 0.6rem;
   text-align: center;
-  padding: 1.1rem 1.4rem;
+  padding: 1.3rem 1.4rem;
   border-radius: 999px;
   background: #25d366;
   color: #fff;
+  font-size: 1.3rem;
   font-weight: 600;
   text-decoration: none;
+}
+
+@media (max-width: 380px) {
+  .drawer {
+    width: calc(100vw - 2.4rem);
+    padding-inline: 1.2rem;
+  }
+
+  .searchForm {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  .actionRow {
+    gap: 0.6rem;
+  }
 }

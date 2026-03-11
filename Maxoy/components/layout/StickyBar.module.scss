@@ -54,6 +54,8 @@
   .sticky {
     grid-template-columns: 1fr;
     align-items: stretch;
+    padding: 0.9rem 1.2rem calc(0.9rem + env(safe-area-inset-bottom));
+    gap: 0.9rem;
   }
 
   .actions {
@@ -65,6 +67,27 @@
   .secondary {
     flex: 1;
     text-align: center;
+    min-height: 4.2rem;
+    padding-inline: 1rem;
+  }
+
+  .summary {
+    gap: 0.1rem;
+    text-align: center;
+  }
+
+  .summary strong {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .summary {
+    display: none;
+  }
+
+  .sticky {
+    gap: 0;
   }
 }
 
