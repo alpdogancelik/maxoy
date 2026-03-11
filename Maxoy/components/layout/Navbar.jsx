@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AiOutlineSearch, AiOutlineShopping, AiOutlineUser } from "react-icons/ai";
 import { FiChevronDown } from "react-icons/fi";
+import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
 
@@ -11,6 +12,7 @@ import SearchModal from "./SearchModal";
 import MobileNav from "./MobileNav";
 import TopBar from "./TopBar";
 import { useStateContext } from "@/context/StateContext";
+import { useTheme } from "@/context/ThemeContext";
 import { LANGUAGES, t } from "@/constants/i18n";
 import { MAIN_CATEGORIES, getMainCategoryTitleByLang } from "@/constants/categories";
 
@@ -25,6 +27,7 @@ const Navbar = () => {
     changeLanguage,
     isAuthenticated,
   } = useStateContext();
+  const { isDark, toggleTheme } = useTheme();
   const router = useRouter();
   const [desktopCategoriesOpen, setDesktopCategoriesOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -171,6 +174,15 @@ const Navbar = () => {
         </nav>
 
         <div className={styles.actions}>
+          <button
+            type="button"
+            className={styles.themeButton}
+            onClick={toggleTheme}
+            aria-label={isDark ? "Light mode" : "Dark mode"}
+            title={isDark ? "Light mode" : "Dark mode"}
+          >
+            {isDark ? <HiOutlineSun /> : <HiOutlineMoon />}
+          </button>
           <button
             type="button"
             className={styles.iconButton}

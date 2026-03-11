@@ -7,11 +7,13 @@ import StickyBar from "./StickyBar";
 import TrustStrip from "./TrustStrip";
 import styles from "./Layout.module.scss";
 import { useStateContext } from "@/context/StateContext";
+import { useTheme } from "@/context/ThemeContext";
 import { t } from "@/constants/i18n";
 import { buildSeoTitle } from "@/lib/seo";
 
 const Layout = ({ children }) => {
   const { language } = useStateContext();
+  const { isDark } = useTheme();
   const brandLabel = t(language, "home.brand");
   const defaultTitle = buildSeoTitle({
     title: t(language, "seo.homeTitle", { brand: brandLabel }),
@@ -41,7 +43,7 @@ const Layout = ({ children }) => {
         />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content={isDark ? "#1d1419" : "#fbf6f5"} />
         <meta name="description" content={defaultDescription}></meta>
       </Head>
       <header>

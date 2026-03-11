@@ -53,6 +53,8 @@
   --container-width: 120rem;
   --announcement-height: 3.4rem;
   --header-height: 8.2rem;
+  --page-bg: radial-gradient(circle at top, #fff7f6 0%, #fbf6f5 45%, #f7eef1 100%);
+  --page-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0));
 }
 
 :root.dark-mode {
@@ -65,6 +67,8 @@
   --muted: var(--color-muted);
   --surface-color: var(--color-surface);
   --accent-soft: var(--color-accent-soft);
+  --page-bg: radial-gradient(circle at top, #261a21 0%, #1b1217 40%, #120d11 100%);
+  --page-overlay: linear-gradient(180deg, rgba(227, 107, 140, 0.05), rgba(255, 255, 255, 0));
 }
 
 @media (max-width: 768px) {
@@ -114,10 +118,21 @@ body {
   font-family: var(--font-base);
   font-weight: 400;
   color: var(--primary-color);
-  background: radial-gradient(circle at top, #fff7f6 0%, #fbf6f5 45%, #f7eef1 100%);
+  background: var(--page-overlay), var(--page-bg);
   margin: 0 auto;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+input,
+textarea,
+select {
+  color: var(--primary-color);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--secondary-color) 32%, transparent);
+  color: #fff;
 }
 
 h1 {
