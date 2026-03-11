@@ -9,15 +9,11 @@ import { getGlobalSettings, getPageBySlug, getPages } from "../lib/cms/store";
 
 const About = ({ cmsPage, preview, globalSettings }) => {
   const { language } = useStateContext();
-  const aboutIntro =
-    language === "tr"
-      ? "Maxoy, bitki ve çiçek ürünleri için hazırlanmış bir e-ticaret demo projesidir. Bu proje, modern arayüz ve kullanıcı deneyimi yeteneklerini sergilemek amacıyla oluşturulmuştur. Geliştirici portföyü:"
-      : t(language, "about.intro");
-  const aboutOutro =
-    language === "tr"
-      ? "Altyapıda Next.js, Sanity, SCSS ve Stripe kullanılmıştır."
-      : t(language, "about.introAfter");
-  const creditsLabel = language === "tr" ? "Görsel kaynak:" : t(language, "about.creditsLabel");
+  const title = language === "en" ? "About Maxoy" : "Maxoy Hakkında";
+  const body =
+    language === "en"
+      ? "Maxoy is a modern e-commerce demo focused on floral and decorative products. It showcases a complete storefront flow with catalog structure, product discovery, cart experience, and admin management screens in a single end-to-end presentation."
+      : "Maxoy, çiçekçilik ve dekorasyon odaklı ürünlerin sergilendiği modern bir e-ticaret demo projesidir. Katalog yapısı, ürün listeleme deneyimi, sepet akışı ve yönetim panelleriyle birlikte uçtan uca bir vitrin altyapısı sunar.";
 
   if (cmsPage) {
     return (
@@ -42,27 +38,8 @@ const About = ({ cmsPage, preview, globalSettings }) => {
       transition={{ duration: 0.7 }}
       className={styles["about-container"]}
     >
-      <h3>{t(language, "about.title")}</h3>
-      <p>
-        {aboutIntro}{" "}
-        <a
-          href="https://www.kennethvega.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {t(language, "about.portfolio")}
-        </a>{" "}
-        {aboutOutro}{" "}
-        {creditsLabel}{" "}
-        <a
-          href="https://www.leonandgeorge.com/"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {t(language, "about.creditsLink")}
-        </a>
-        .
-      </p>
+      <h3>{title}</h3>
+      <p>{body}</p>
     </motion.div>
   );
 };

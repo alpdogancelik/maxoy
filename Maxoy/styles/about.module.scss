@@ -15,3 +15,13 @@
     max-width: 80ch;
   }
 }
+
+:global(.dark-mode) .about-container {
+  h3 {
+    color: color-mix(in srgb, var(--primary-color) 96%, transparent);
+  }
+
+  p {
+    color: color-mix(in srgb, var(--primary-color) 90%, transparent);
+  }
+}

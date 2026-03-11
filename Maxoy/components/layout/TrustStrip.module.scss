@@ -34,6 +34,14 @@
   color: color-mix(in srgb, var(--primary-color) 72%, var(--surface-color));
 }
 
+:global(.dark-mode) .icon {
+  color: color-mix(in srgb, var(--primary-color) 92%, transparent);
+}
+
+:global(.dark-mode) .text {
+  color: color-mix(in srgb, var(--primary-color) 88%, transparent);
+}
+
 @include mixin.respond(tab-port) {
   .strip {
     padding: 2.4rem 0;
