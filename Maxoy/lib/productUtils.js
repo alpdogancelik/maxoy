@@ -21,14 +21,25 @@ export const toNumber = (value, fallback = 0) => {
 
 export const getLocalizedField = (product, field, lang = "tr") => {
   if (!product) return "";
-  if (lang === "en" && product[`${field}En`]) return product[`${field}En`];
-  return product[field] || "";
+  if (lang === "en") {
+    return (
+      product[`${field}En`] ||
+      product[`${field}EN`] ||
+      product[`${field}_en`] ||
+      product[field] ||
+      product[`${field}TR`] ||
+      ""
+    );
+  }
+  return product[field] || product[`${field}TR`] || "";
 };
 
 export const getLocalizedArrayField = (product, field, lang = "tr") => {
   if (!product) return [];
-  if (lang === "en" && product[`${field}En`]) return normalizeArray(product[`${field}En`]);
-  return normalizeArray(product[field]);
+  if (lang === "en") {
+    return normalizeArray(product[`${field}En`] || product[`${field}EN`] || product[`${field}_en`] || product[field]);
+  }
+  return normalizeArray(product[field] || product[`${field}TR`]);
 };
 
 export const getProductImages = (product) => {
@@ -55,6 +66,18 @@ export const getVariantGroupKey = (product) => {
     product.groupCode ||
     product.baseCode ||
     product.parentCode ||
+    ""
+  );
+};
+
+export const getVariantDisplayLabel = (product, lang = "tr") => {
+  if (!product) return "";
+  return (
+    getLocalizedField(product, "variantLabel", lang) ||
+    [getLocalizedField(product, "primaryColor", lang), getLocalizedField(product, "secondaryColor", lang)]
+      .filter(Boolean)
+      .join(" / ") ||
+    getLocalizedField(product, "colorTone", lang) ||
     ""
   );
 };

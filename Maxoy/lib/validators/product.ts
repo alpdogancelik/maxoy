@@ -1,5 +1,29 @@
 import { z } from "zod";
 
+const ProductVariantSchema = z.object({
+  id: z.string().optional(),
+  slug: z.string().optional(),
+  sku: z.string().min(1),
+  barcode: z.string().optional().nullable(),
+  priceRetail: z.number().min(0),
+  priceWholesale: z.number().min(0).optional().nullable(),
+  priceVip: z.number().min(0).optional().nullable(),
+  discount: z.number().min(0).optional().nullable(),
+  stockQty: z.number().int().min(0),
+  isActive: z.boolean().optional(),
+  status: z.enum(["DRAFT", "PUBLISHED"]).optional(),
+  colorToneTR: z.string().optional().nullable(),
+  colorToneEN: z.string().optional().nullable(),
+  secondaryColorTR: z.string().optional().nullable(),
+  secondaryColorEN: z.string().optional().nullable(),
+  variantLabelTR: z.string().optional().nullable(),
+  variantLabelEN: z.string().optional().nullable(),
+  swatchPrimary: z.string().optional().nullable(),
+  swatchSecondary: z.string().optional().nullable(),
+  variantSortOrder: z.number().int().min(0).optional(),
+  mediaIds: z.array(z.string()).optional(),
+});
+
 export const ProductSchema = z.object({
   nameTR: z.string().min(1),
   nameEN: z.string().min(1),
@@ -14,6 +38,16 @@ export const ProductSchema = z.object({
   stockQty: z.number().int().min(0),
   isActive: z.boolean().optional(),
   isFeatured: z.boolean().optional(),
+  variantGroup: z.string().optional().nullable(),
+  colorToneTR: z.string().optional().nullable(),
+  colorToneEN: z.string().optional().nullable(),
+  secondaryColorTR: z.string().optional().nullable(),
+  secondaryColorEN: z.string().optional().nullable(),
+  variantLabelTR: z.string().optional().nullable(),
+  variantLabelEN: z.string().optional().nullable(),
+  swatchPrimary: z.string().optional().nullable(),
+  swatchSecondary: z.string().optional().nullable(),
+  variantSortOrder: z.number().int().min(0).optional(),
   tags: z.array(z.string()).optional(),
   shortDescTR: z.string().optional().nullable(),
   shortDescEN: z.string().optional().nullable(),
@@ -23,4 +57,5 @@ export const ProductSchema = z.object({
   seoDesc: z.string().optional().nullable(),
   status: z.enum(["DRAFT", "PUBLISHED"]).optional(),
   mediaIds: z.array(z.string()).optional(),
+  variants: z.array(ProductVariantSchema).optional(),
 });

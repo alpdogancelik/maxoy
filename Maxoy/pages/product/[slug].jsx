@@ -15,57 +15,59 @@ import {
   getLocalizedField,
   getPriceForMode,
   getProductMainImage,
+  getVariantDisplayLabel,
 } from "../../lib/productUtils";
-
-function findProductBySlug(products, slug) {
-  const needle = String(slug || "").trim().toLowerCase();
-  if (!needle) return null;
-
-  const flat = [];
-  (products || []).forEach((p) => {
-    flat.push(p);
-    if (Array.isArray(p?.variants) && p.variants.length) {
-      p.variants.forEach((v) => flat.push(v));
-    }
-  });
-
-  return (
-    flat.find((p) => String(p?.slug?.current || "").toLowerCase() === needle) ||
-    flat.find((p) => String(p?.code || "").toLowerCase() === needle) ||
-    flat.find((p) => String(p?.id || "").toLowerCase() === needle) ||
-    flat.find((p) => String(p?.name || "").toLowerCase().replace(/\s+/g, "-") === needle) ||
-    null
-  );
-}
 
 export default function ProductPage({ product, globalSettings }) {
   const router = useRouter();
   const { language, currency, pricingMode, onAdd } = useStateContext();
+  const variantItems = useMemo(() => {
+    if (Array.isArray(product?.variants) && product.variants.length) return product.variants;
+    return product ? [product] : [];
+  }, [product]);
+
+  const selectedVariant = useMemo(() => {
+    const selectedSlug = String(product?.selectedVariantSlug || router?.query?.slug || "").toLowerCase();
+    if (!selectedSlug) return variantItems[0] || product;
+    return (
+      variantItems.find((item) => String(item?.slug?.current || item?.code || item?.id || "").toLowerCase() === selectedSlug) ||
+      variantItems[0] ||
+      product
+    );
+  }, [product, router?.query?.slug, variantItems]);
 
   const brandLabel = globalSettings?.data?.siteName || t(language, "home.brand");
-  const nameText = getLocalizedField(product, "name", language) || product.name || t(language, "misc.unnamed");
-  const summaryText = getLocalizedField(product, "summary", language) || product.summary || "";
-  const imageUrl = getProductMainImage(product);
+  const nameText = getLocalizedField(selectedVariant, "name", language) || selectedVariant?.name || t(language, "misc.unnamed");
+  const summaryText = getLocalizedField(product, "summary", language) || getLocalizedField(selectedVariant, "summary", language) || product.summary || "";
+  const imageUrl = getProductMainImage(selectedVariant);
 
-  const priceValue = getPriceForMode(product, pricingMode);
+  const priceValue = getPriceForMode(selectedVariant, pricingMode);
   const priceText = formatPrice(priceValue, currency, language);
 
   const seoTitle = buildSeoTitle({ title: nameText, brand: brandLabel });
 
-  const stockValue = Number(product.stock || 0);
+  const stockValue = Number(selectedVariant?.stock || 0);
+  const variantSelectorTitle =
+    variantItems.some((item) => getLocalizedField(item, "secondaryColor", language))
+      ? language === "en"
+        ? "Color combination"
+        : "Renk kombinasyonu"
+      : language === "en"
+      ? "Color"
+      : "Renk";
 
   const whatsappUrl = useMemo(() => {
-    if (!product) return "";
+    if (!selectedVariant) return "";
     if (!WHATSAPP_NUMBER) return "";
     const message = buildWhatsappProductMessage({
       language,
-      product,
+      product: selectedVariant,
       currency,
       pricingMode,
       quantity: 1,
     });
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  }, [currency, language, pricingMode, product]);
+  }, [currency, language, pricingMode, selectedVariant]);
 
   if (router.isFallback) return null;
   if (!product) return null;
@@ -113,6 +115,69 @@ export default function ProductPage({ product, globalSettings }) {
               </p>
             ) : null}
 
+            {variantItems.length > 1 ? (
+              <div style={{ marginTop: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+                <div style={{ fontWeight: 700 }}>
+                  {variantSelectorTitle}:{" "}
+                  <span style={{ color: "rgba(17,24,39,0.72)", fontWeight: 500 }}>
+                    {getVariantDisplayLabel(selectedVariant, language) || t(language, "misc.unnamed")}
+                  </span>
+                </div>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+                  {variantItems.map((variant) => {
+                    const variantSlug = variant?.slug?.current || variant?.code || variant?.id;
+                    const isSelected =
+                      String(variantSlug || "").toLowerCase() ===
+                      String(selectedVariant?.slug?.current || selectedVariant?.code || selectedVariant?.id || "").toLowerCase();
+                    const primary = variant?.swatchPrimary || "#d4a4ae";
+                    const secondary = variant?.swatchSecondary || "";
+                    const swatchStyle = secondary
+                      ? `linear-gradient(135deg, ${primary} 0%, ${primary} 50%, ${secondary} 50%, ${secondary} 100%)`
+                      : primary;
+
+                    return (
+                      <Link
+                        key={variantSlug}
+                        href={`/product/${variantSlug}`}
+                        style={{
+                          display: "inline-flex",
+                          flexDirection: "column",
+                          gap: 8,
+                          alignItems: "center",
+                          textDecoration: "none",
+                          color: "inherit",
+                          width: 82,
+                        }}
+                      >
+                        <span
+                          title={getVariantDisplayLabel(variant, language)}
+                          style={{
+                            width: 48,
+                            height: 48,
+                            borderRadius: 14,
+                            border: isSelected ? "2px solid #9b2c3f" : "1px solid rgba(17,24,39,0.16)",
+                            background: swatchStyle,
+                            boxShadow: isSelected ? "0 0 0 4px rgba(155,44,63,0.12)" : "none",
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontSize: 12,
+                            lineHeight: 1.35,
+                            textAlign: "center",
+                            color: isSelected ? "#7a2d3a" : "rgba(17,24,39,0.72)",
+                            fontWeight: isSelected ? 700 : 500,
+                          }}
+                        >
+                          {getVariantDisplayLabel(variant, language)}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
+
             <div style={{ marginTop: 16, display: "flex", gap: 18, flexWrap: "wrap", alignItems: "center" }}>
               <div style={{ fontSize: 28, fontWeight: 800 }}>{priceText}</div>
               <div style={{ color: "rgba(17,24,39,0.65)" }}>KDV dahil</div>
@@ -124,7 +189,7 @@ export default function ProductPage({ product, globalSettings }) {
             <div style={{ marginTop: 18, display: "flex", gap: 10, flexWrap: "wrap" }}>
               <button
                 type="button"
-                onClick={() => onAdd(product, 1)}
+                onClick={() => onAdd(selectedVariant, 1)}
                 disabled={stockValue <= 0}
                 style={{
                   border: 0,

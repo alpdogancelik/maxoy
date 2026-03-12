@@ -161,6 +161,16 @@ model Product {
   stockQty       Int      @default(0)
   isActive       Boolean  @default(true)
   isFeatured     Boolean  @default(false)
+  variantGroup   String?
+  variantLabelTR String?
+  variantLabelEN String?
+  colorToneTR    String?
+  colorToneEN    String?
+  secondaryColorTR String?
+  secondaryColorEN String?
+  swatchPrimary  String?
+  swatchSecondary String?
+  variantSortOrder Int    @default(0)
   tags           String[]
   status         PublishStatus @default(DRAFT)
   publishedAt    DateTime?
@@ -169,6 +179,8 @@ model Product {
   deletedAt      DateTime?
   media          ProductMedia[]
   featuredIn     HomeFeaturedProduct[]
+
+  @@index([variantGroup])
 }
 
 model ProductMedia {

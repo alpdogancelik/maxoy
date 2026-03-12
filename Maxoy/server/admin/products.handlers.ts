@@ -7,6 +7,11 @@ import { logAdminAction } from "@/lib/admin-audit";
 import { AuditAction } from "@prisma/client";
 import { revalidateProducts } from "@/lib/revalidate";
 import { Prisma } from "@prisma/client";
+import {
+  buildVariantFields,
+  createVariantGroupKey,
+  normalizeVariantGroup,
+} from "./product-variant-utils";
 
 async function ensureUniqueSlug(slug: string) {
   let candidate = slug;
@@ -91,39 +96,88 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "SKU already exists" }, { status: 400 });
     }
 
+    const incomingVariants = Array.isArray(payload.variants) ? payload.variants : [];
+    const hasSiblingVariants = incomingVariants.length > 0;
+    const explicitGroup = normalizeVariantGroup(payload.variantGroup);
+    const variantGroup = explicitGroup || (hasSiblingVariants ? createVariantGroupKey(payload.slug || payload.nameTR) : null);
     const baseSlug = payload.slug ? toSlug(payload.slug) : toSlug(payload.nameTR);
     const slug = await ensureUniqueSlug(baseSlug);
+    const sharedFields = {
+      nameTR: payload.nameTR,
+      nameEN: payload.nameEN,
+      categoryId: payload.categoryId,
+      shortDescTR: payload.shortDescTR ?? null,
+      shortDescEN: payload.shortDescEN ?? null,
+      longDescTR: payload.longDescTR ?? null,
+      longDescEN: payload.longDescEN ?? null,
+      seoTitle: payload.seoTitle ?? null,
+      seoDesc: payload.seoDesc ?? null,
+      isFeatured: Boolean(payload.isFeatured),
+      tags: payload.tags || [],
+    };
+    const { categoryId, ...sharedFieldsWithoutCategory } = sharedFields;
 
-    const product = await prisma.product.create({
-      data: {
-        nameTR: payload.nameTR,
-        nameEN: payload.nameEN,
-        slug,
-        sku: payload.sku,
-        barcode: payload.barcode || null,
-        categoryId: payload.categoryId,
-        priceRetail: payload.priceRetail,
-        priceWholesale: payload.priceWholesale ?? null,
-        priceVip: payload.priceVip ?? null,
-        discount: payload.discount ?? null,
-        stockQty: payload.stockQty,
-        isActive: payload.isActive ?? true,
-        isFeatured: payload.isFeatured ?? false,
-        tags: payload.tags || [],
-        shortDescTR: payload.shortDescTR ?? null,
-        shortDescEN: payload.shortDescEN ?? null,
-        longDescTR: payload.longDescTR ?? null,
-        longDescEN: payload.longDescEN ?? null,
-        seoTitle: payload.seoTitle ?? null,
-        seoDesc: payload.seoDesc ?? null,
-        status: payload.status ?? "DRAFT",
-        publishedAt: payload.status === "PUBLISHED" ? new Date() : null,
-        media: payload.mediaIds?.length
-          ? {
-              create: payload.mediaIds.map((mediaId, index) => ({ mediaId, sortOrder: index })),
-            }
-          : undefined,
-      },
+    const product = await prisma.$transaction(async (tx) => {
+      const created = await tx.product.create({
+        data: {
+          ...sharedFieldsWithoutCategory,
+          category: { connect: { id: categoryId } },
+          slug,
+          sku: payload.sku,
+          variantGroup,
+          ...buildVariantFields(
+            {
+              barcode: payload.barcode,
+              priceRetail: payload.priceRetail,
+              priceWholesale: payload.priceWholesale,
+              priceVip: payload.priceVip,
+              discount: payload.discount,
+              stockQty: payload.stockQty,
+              isActive: payload.isActive,
+              status: payload.status,
+              colorToneTR: payload.colorToneTR,
+              colorToneEN: payload.colorToneEN,
+              secondaryColorTR: payload.secondaryColorTR,
+              secondaryColorEN: payload.secondaryColorEN,
+              variantLabelTR: payload.variantLabelTR,
+              variantLabelEN: payload.variantLabelEN,
+              swatchPrimary: payload.swatchPrimary,
+              swatchSecondary: payload.swatchSecondary,
+              variantSortOrder: payload.variantSortOrder,
+            },
+            0
+          ),
+          media: payload.mediaIds?.length
+            ? {
+                create: payload.mediaIds.map((mediaId, index) => ({ mediaId, sortOrder: index })),
+              }
+            : undefined,
+        },
+      });
+
+      for (let index = 0; index < incomingVariants.length; index += 1) {
+        const variant = incomingVariants[index];
+        const variantBaseSlug = variant.slug ? toSlug(variant.slug) : toSlug(`${payload.nameTR}-${variant.sku}`);
+        const variantSlug = await ensureUniqueSlug(variantBaseSlug);
+
+        await tx.product.create({
+          data: {
+            ...sharedFieldsWithoutCategory,
+            category: { connect: { id: categoryId } },
+            slug: variantSlug,
+            sku: variant.sku,
+            variantGroup,
+            ...buildVariantFields({ ...variant, status: variant.status ?? payload.status }, index + 1),
+            media: variant.mediaIds?.length
+              ? {
+                  create: variant.mediaIds.map((mediaId, mediaIndex) => ({ mediaId, sortOrder: mediaIndex })),
+                }
+              : undefined,
+          },
+        });
+      }
+
+      return created;
     });
 
     await logAdminAction({

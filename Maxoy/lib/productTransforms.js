@@ -84,6 +84,8 @@ export const groupVariants = (products = []) => {
   return Array.from(groups.values()).map((item) => {
     if (item.variants && item.variants.length) {
       const sorted = [...item.variants].sort((a, b) => {
+        const sortDiff = Number(a.variantSortOrder || 0) - Number(b.variantSortOrder || 0);
+        if (sortDiff !== 0) return sortDiff;
         const aLabel = `${a.colorTone || ""} ${a.sizeInfo || ""}`.trim();
         const bLabel = `${b.colorTone || ""} ${b.sizeInfo || ""}`.trim();
         return aLabel.localeCompare(bLabel, "tr");
