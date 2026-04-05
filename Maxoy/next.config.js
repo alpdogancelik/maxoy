@@ -4,7 +4,6 @@ const mediaHost = process.env.NEXT_PUBLIC_MEDIA_HOST || "localhost";
 
 const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
-  output: "standalone",
   reactStrictMode: true,
   experimental: {
     largePageDataBytes: 256 * 1000,
