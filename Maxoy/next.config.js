@@ -1,3 +1,4 @@
+const path = require("path");
 /** @type {import('next').NextConfig} */
 const mediaHost = process.env.NEXT_PUBLIC_MEDIA_HOST || "localhost";
 
@@ -29,6 +30,10 @@ const nextConfig = {
     styledComponents: true,
   },
   webpack(config) {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@": path.resolve(__dirname),
+    };
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
