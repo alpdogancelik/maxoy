@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddressForm.module.scss";
-import { t } from "@/constants/i18n";
-import { useStateContext } from "@/context/StateContext";
-import { createEmptyAddress, formatPhoneTR, validateAddress } from "@/lib/addressBook";
+import { t } from "../../constants/i18n";
+import { useStateContext } from "../../context/StateContext";
+import { createEmptyAddress, formatPhoneTR, validateAddress } from "../../lib/addressBook";
 
 const AddressForm = ({
   initialValue,

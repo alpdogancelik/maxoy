@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./AddressCard.module.scss";
-import { t } from "@/constants/i18n";
-import { useStateContext } from "@/context/StateContext";
+import { t } from "../../constants/i18n";
+import { useStateContext } from "../../context/StateContext";
 
 const AddressCard = ({
   address,
